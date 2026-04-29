@@ -16,6 +16,16 @@ def main():
     while run:
         screen.fill((10, 10, 20))
 
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run =False
+
+        mouse_x, mouse_y = pygame.mouse.get_pos()
+
+        pygame.draw.circle(screen, (190, 16, 224), (mouse_x, mouse_y), 10)
+
+        pygame.display.flip()
+
 
         clock.tick(60)
 
