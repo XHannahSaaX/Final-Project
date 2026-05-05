@@ -11,7 +11,7 @@ class Particle():
         self.life = life
         self.dead = False
         self.shape = shape
-        self.vel = [random.uniform(-1, 1), random.uniform(1, 3)]
+        self.vel = [random.uniform(-0.2, 0.2), random.uniform(1.5, 3)]
 
         if color is None:
             self.color = pygame.Color(random.randrange(0, 255),
@@ -27,7 +27,9 @@ class Particle():
         if self.age > self.life:
             self.dead = True
 
-        self.vel[1] += 0.5
+        self.vel[1] += 0.005
+        self.pos = (self.pos[0] + self.vel[0] * dt * 0.05,
+                     self.pos[1] + self.vel[1] * dt * 0.05)
         self.alpha = max(0, 255 * (1 - (self.age / self.life)))
 
     def draw(self, screen):
@@ -60,7 +62,10 @@ def main():
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
         for _ in range(5):
-            particles.append(Particle(pos=(mouse_x, mouse_y), size=random.randrange(5, 10), life=500))
+            particles.append(Particle(pos=(mouse_x + random.randint(-4, 4),
+                                            mouse_y + random.randint(-4, 4)),
+                                       size=random.randrange(4, 8),
+                                         life=1000))
 
         pygame.draw.circle(screen, (190, 16, 224), (mouse_x, mouse_y), 5)
 
