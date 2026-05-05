@@ -32,6 +32,13 @@ class Particle():
         self.vel[1] += 0.5
         self.alpha = 255 * (1 - (self.age / self.life))
 
+    def draw(self, screen):
+        surf = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
+        color = (*self.color[:3], int(self.alpha))
+
+        pygame.draw.circle(surf, color, (self.color // 2, self.color // 2), self.color // 2)
+        screen.blit(surf, self.pos)
+
 
 def main():
 
