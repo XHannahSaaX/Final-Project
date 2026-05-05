@@ -11,7 +11,7 @@ class Particle():
         self.life = life
         self.dead = False
         self.shape = shape
-        self.vel = [random.uniform(-1, 1)]
+        self.vel = [random.uniform(-1, 1), random.uniform(1, 3)]
 
         if color is None:
             self.color = pygame.Color(random.randrange(0, 255),
@@ -21,22 +21,20 @@ class Particle():
             self.color = color
 
         self.alpha = 255
-        self.surface = self.update_surface()
 
     def update(self, dt):
         self.age += dt
         if self.age > self.life:
-            #print("Particle is dead")
             self.dead = True
 
         self.vel[1] += 0.5
-        self.alpha = 255 * (1 - (self.age / self.life))
+        self.alpha = max(0, 255 * (1 - (self.age / self.life)))
 
     def draw(self, screen):
         surf = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
-        color = (*self.color[:3], int(self.alpha))
+        color = (self.color.r, self.color.g, self.color.b, int(self.alpha))
 
-        pygame.draw.circle(surf, color, (self.color // 2, self.color // 2), self.color // 2)
+        pygame.draw.circle(surf, color, (self.size // 2, self.size // 2), self.size // 2)
         screen.blit(surf, self.pos)
 
 
@@ -49,6 +47,8 @@ def main():
     screen = pygame.display.set_mode((800, 600))
     clock = pygame.time.Clock()
 
+    particles = []
+
     run = True
     while run:
         screen.fill((10, 10, 20))
@@ -59,7 +59,20 @@ def main():
 
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        pygame.draw.circle(screen, (190, 16, 224), (mouse_x, mouse_y), 10)
+        for _ in range(5):
+            particles.append(Particle(pos=(mouse_x, mouse_y), size=random.randrange(5, 10), life=500))
+
+        pygame.draw.circle(screen, (190, 16, 224), (mouse_x, mouse_y), 5)
+
+        dt = clock.get_time()
+
+        for p in particles[:]:
+            p.update(dt)
+            p.draw(screen)
+
+            if p.dead:
+                particles.remove(p)
+
 
         pygame.display.flip()
 
