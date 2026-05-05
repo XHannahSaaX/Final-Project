@@ -61,7 +61,7 @@ def main():
 
         mouse_x, mouse_y = pygame.mouse.get_pos()
 
-        for _ in range(5):
+        for _ in range(1):
             particles.append(Particle(pos=(mouse_x + random.randint(-4, 4),
                                             mouse_y + random.randint(-4, 4)),
                                        size=random.randrange(4, 8),
