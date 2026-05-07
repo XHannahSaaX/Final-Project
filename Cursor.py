@@ -66,8 +66,21 @@ def main():
                                             mouse_y + random.randint(-4, 4)),
                                        size=random.randrange(4, 8),
                                          life=1000))
+            
+        star_points = [
+            (200, 20)
+            (235, 151)
+            (371, 144)
+            (257, 219)
+            (306, 346)
+            (200, 260)
+            (94, 346)
+            (143, 219)
+            (29, 144)
+            (165, 151)
+        ]
 
-        pygame.draw.circle(screen, (190, 16, 224), (mouse_x, mouse_y), 5)
+        pygame.draw.polygon(screen, (190, 16, 224), (mouse_x, mouse_y), star_points, 5)
 
         dt = clock.get_time()
 
