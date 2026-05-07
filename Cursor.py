@@ -68,19 +68,21 @@ def main():
                                          life=1000))
             
         star_points = [
-            (200, 20)
-            (235, 151)
-            (371, 144)
-            (257, 219)
-            (306, 346)
-            (200, 260)
-            (94, 346)
-            (143, 219)
-            (29, 144)
-            (165, 151)
+            (0, -30),
+            (8, -8),
+            (30, -8),
+            (12, 5),
+            (18, 28),
+            (0, 14),
+            (-18, 28),
+            (-12, 5),
+            (-30, -8),
+            (-8, -8)
         ]
 
-        pygame.draw.polygon(screen, (190, 16, 224), (mouse_x, mouse_y), star_points, 5)
+        transition_points = [(x + mouse_x, y + mouse_y) for x, y in star_points]
+
+        pygame.draw.polygon(screen, (190, 16, 224), transition_points, 1)
 
         dt = clock.get_time()
 
