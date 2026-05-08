@@ -91,6 +91,12 @@ def main():
         if event.type == pygame.MOUSEBUTTONDOWN:
             for _ in range(50):
 
+                angle = random.uniform(0, math.pi * 2)
+                speed = random.uniform(2, 8)
+                vel_x = math.cos(angle) * speed
+                vel_y = math.sin(angle) * speed
+
+                particles.append(Particle(pos=(mouse_x, mouse_y), vel=[vel_x, vel_y], size=5, life=500))
 
         dt = clock.get_time()
 
