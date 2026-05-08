@@ -96,7 +96,7 @@ def main():
                 vel_x = math.cos(angle) * speed
                 vel_y = math.sin(angle) * speed
 
-                particles.append(Particle(pos=(mouse_x, mouse_y), vel=[vel_x, vel_y], size=5, life=500))
+                particles.append(Particle(pos=(mouse_x, mouse_y), vel=[vel_x, vel_y], size=5, life=1000))
 
         dt = clock.get_time()
 
