@@ -4,14 +4,19 @@ import random
 
 class Particle():
 
-    def __init__(self, pos=(0, 0), size=15, life=1000, color=None, shape="circ"):
+    def __init__(self, pos=(0, 0), size=15, life=1000, color=None, shape="circ", vel=None):
         self.pos = pos
         self.size = size
         self.age = 0
         self.life = life
         self.dead = False
         self.shape = shape
-        self.vel = [random.uniform(-0.2, 0.2), random.uniform(1.5, 3)]
+        
+
+        if vel is None:
+            self.vel = [random.uniform(-0.2, 0.2), random.uniform(1.5, 3)]
+        else:
+            self.vel = vel
 
         if color is None:
             self.color = pygame.Color(random.randrange(0, 255),
@@ -81,8 +86,11 @@ def main():
         ]
 
         transition_points = [(x + mouse_x, y + mouse_y) for x, y in star_points]
-
         pygame.draw.polygon(screen, (190, 16, 224), transition_points, 3)
+
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            for _ in range(50):
+
 
         dt = clock.get_time()
 
