@@ -105,29 +105,18 @@ def main():
     while run:
         screen.fill((10, 10, 20))
 
+        mouse_pos = pygame.mouse.get_pos()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run =False
 
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-
-        for _ in range(1):
-            particles.append(Particle(pos=(mouse_x + random.randint(-4, 4),
-                                            mouse_y + random.randint(-4, 4)),
-                                       size=random.randrange(4, 8),
-                                         life=1000))
-            
-        
-
         if event.type == pygame.MOUSEBUTTONDOWN:
-            for _ in range(50):
+            explosion_particles(particles, mouse_pos)
 
-                angle = random.uniform(0, math.pi * 2)
-                speed = random.uniform(2, 8)
-                vel_x = math.cos(angle) * speed
-                vel_y = math.sin(angle) * speed
+        follow_cursor(particles, mouse_pos)
 
-                particles.append(Particle(pos=(mouse_x, mouse_y), vel=[vel_x, vel_y], size=5, life=1000))
+        cursor_shape(screen, mouse_pos)
 
         dt = clock.get_time()
 
@@ -140,7 +129,6 @@ def main():
 
 
         pygame.display.flip()
-
 
         clock.tick(60)
 
