@@ -54,21 +54,21 @@ def follow_cursor(particles, mouse_pos):
                                          life=1000))
 
 
-def explosion_particles(particles,mouse_pos, amount=50):
+def explosion_particles(particles,mouse_pos, amount=30):
 
     mouse_x, mouse_y = mouse_pos
 
     for _ in range(amount):
 
                 angle = random.uniform(0, math.pi * 2)
-                speed = random.uniform(2, 8)
+                speed = random.uniform(2, 6)
                 vel_x = math.cos(angle) * speed
                 vel_y = math.sin(angle) * speed
 
                 particles.append(Particle(pos=(mouse_x, mouse_y), 
                                           vel=[vel_x, vel_y], 
                                           size=5, 
-                                          life=1000))
+                                          life=300))
 
 def cursor_shape(screen, mouse_pos):
 
