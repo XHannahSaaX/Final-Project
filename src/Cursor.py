@@ -58,8 +58,6 @@ def explosion_particles(particles,mouse_pos, amount=30):
 
     mouse_x, mouse_y = mouse_pos
 
-    explosion_color = pygame.Color(255, 197, 71)
-
     for _ in range(amount):
 
                 angle = random.uniform(0, math.pi * 2)
@@ -67,11 +65,16 @@ def explosion_particles(particles,mouse_pos, amount=30):
                 vel_x = math.cos(angle) * speed
                 vel_y = math.sin(angle) * speed
 
+                explosion_color = pygame.Color(255,
+                                               random.randint(80, 220),
+                                               random.randint(120, 180))
+
                 particles.append(Particle(pos=(mouse_x, mouse_y), 
                                           vel=[vel_x, vel_y], 
                                           size=5, 
                                           life=300,
                                           color=explosion_color))
+                
 
 def cursor_shape(screen, mouse_pos):
 
