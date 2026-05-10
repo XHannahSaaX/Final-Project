@@ -111,7 +111,7 @@ def main():
 
     pygame.mouse.set_visible(False)
 
-    screen = pygame.display.set_mode((800, 600))
+    screen = pygame.display.set_mode((0, 0), pygame.NOFRAME)
     clock = pygame.time.Clock()
 
     particles = []
@@ -125,6 +125,10 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run =False
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    run = False
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 explosion_particles(particles, mouse_pos)
