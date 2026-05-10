@@ -20,8 +20,8 @@ class Particle():
 
         if color is None:
             self.color = pygame.Color(random.randrange(0, 255),
-                                   random.randrange(0, 255),
-                                    random.randrange(0, 255))
+                                      random.randrange(0, 255),
+                                      random.randrange(0, 255),)
         else:
             self.color = color
 
@@ -58,6 +58,8 @@ def explosion_particles(particles,mouse_pos, amount=30):
 
     mouse_x, mouse_y = mouse_pos
 
+    explosion_color = pygame.Color(255, 197, 71)
+
     for _ in range(amount):
 
                 angle = random.uniform(0, math.pi * 2)
@@ -68,7 +70,8 @@ def explosion_particles(particles,mouse_pos, amount=30):
                 particles.append(Particle(pos=(mouse_x, mouse_y), 
                                           vel=[vel_x, vel_y], 
                                           size=5, 
-                                          life=300))
+                                          life=300,
+                                          color=explosion_color))
 
 def cursor_shape(screen, mouse_pos):
 
