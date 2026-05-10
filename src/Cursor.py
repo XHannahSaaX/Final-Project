@@ -4,13 +4,15 @@ import random
 
 class Particle():
 
-    def __init__(self, pos=(0, 0), size=15, life=1000, color=None, shape="circ", vel=None):
+    def __init__(self, pos=(0, 0), size=15, life=1000, color=None, shape="circ", vel=None, rainbow=True):
         self.pos = pos
         self.size = size
         self.age = 0
         self.life = life
         self.dead = False
         self.shape = shape
+        self.rainbow = rainbow
+        self.hue = random.randint(0, 360)
         
 
         if vel is None:
@@ -37,6 +39,11 @@ class Particle():
                      self.pos[1] + self.vel[1] * dt * 0.05)
         self.alpha = max(0, 255 * (1 - (self.age / self.life)))
 
+        if self.rainbow:
+            self.hue = (self.pos[1] * 0.5) % 360
+            self.color = pygame.Color(0)
+            self.color.hsva = (self.hue, 100, 100, 100)
+
     def draw(self, screen):
         surf = pygame.Surface((self.size, self.size), pygame.SRCALPHA)
         color = (self.color.r, self.color.g, self.color.b, int(self.alpha))
@@ -54,7 +61,7 @@ def follow_cursor(particles, mouse_pos):
                                          life=1000))
 
 
-def explosion_particles(particles,mouse_pos, amount=10):
+def explosion_particles(particles,mouse_pos, amount=50):
 
     mouse_x, mouse_y = mouse_pos
 
@@ -66,14 +73,15 @@ def explosion_particles(particles,mouse_pos, amount=10):
                 vel_y = math.sin(angle) * speed
 
                 explosion_color = pygame.Color(255,
-                                               random.randint(20, 75),
-                                               random.randint(66, 255))
+                                               random.randint(31, 255),
+                                               random.randint(25, 165))
 
                 particles.append(Particle(pos=(mouse_x, mouse_y), 
                                           vel=[vel_x, vel_y], 
                                           size=5, 
-                                          life=300,
-                                          color=explosion_color))
+                                          life=500,
+                                          color=explosion_color,
+                                          rainbow=False))
                 
 
 def cursor_shape(screen, mouse_pos):
@@ -118,8 +126,8 @@ def main():
             if event.type == pygame.QUIT:
                 run =False
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            explosion_particles(particles, mouse_pos)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                explosion_particles(particles, mouse_pos)
 
         follow_cursor(particles, mouse_pos)
 
