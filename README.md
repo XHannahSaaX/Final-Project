@@ -1,10 +1,10 @@
 # Magical Cursor
 
 ## Demo
-Demo Video: <URL>
+Demo Video: https://youtu.be/ce0naAtS6rc
 
 ## GitHub Repository
-GitHub Repo: [<URL>](https://github.com/XHannahSaaX/Final-Project.git)
+GitHub Repo: https://github.com/XHannahSaaX/Final-Project.git
 
 ## Description
 
