@@ -44,6 +44,28 @@ class Particle():
         pygame.draw.circle(surf, color, (self.size // 2, self.size // 2), self.size // 2)
         screen.blit(surf, self.pos)
 
+def follow_cursor(particles, mouse_pos):
+
+    mouse_x, mouse_y = mouse_pos
+
+    particles.append(Particle(pos=(mouse_x + random.randint(-4, 4),
+                                    mouse_y + random.randint(-4, 4)),
+                                       size=random.randrange(4, 8),
+                                         life=1000))
+
+
+def explosion_particles(particles,mouse_pos, amount=50):
+
+    mouse_x, mouse_y = mouse_pos
+
+    for _ in range(amount):
+
+                angle = random.uniform(0, math.pi * 2)
+                speed = random.uniform(2, 8)
+                vel_x = math.cos(angle) * speed
+                vel_y = math.sin(angle) * speed
+
+                particles.append(Particle(pos=(mouse_x, mouse_y), vel=[vel_x, vel_y], size=5, life=1000))
 
 def main():
 
