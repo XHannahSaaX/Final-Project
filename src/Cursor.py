@@ -65,7 +65,30 @@ def explosion_particles(particles,mouse_pos, amount=50):
                 vel_x = math.cos(angle) * speed
                 vel_y = math.sin(angle) * speed
 
-                particles.append(Particle(pos=(mouse_x, mouse_y), vel=[vel_x, vel_y], size=5, life=1000))
+                particles.append(Particle(pos=(mouse_x, mouse_y), 
+                                          vel=[vel_x, vel_y], 
+                                          size=5, 
+                                          life=1000))
+
+def cursor_shape(screen, mouse_pos):
+
+    mouse_x, mouse_y =mouse_pos
+
+    star_points = [
+            (0, -10),
+            (3, -3),
+            (10, -3),
+            (4, 2),
+            (6, 9),
+            (0, 5),
+            (-6, 9),
+            (-4, 2),
+            (-10, -3),
+            (-3, -3)
+        ]
+
+    transition_points = [(x + mouse_x, y + mouse_y) for x, y in star_points]
+    pygame.draw.polygon(screen, (190, 16, 224), transition_points, 3)
 
 def main():
 
@@ -94,21 +117,7 @@ def main():
                                        size=random.randrange(4, 8),
                                          life=1000))
             
-        star_points = [
-            (0, -10),
-            (3, -3),
-            (10, -3),
-            (4, 2),
-            (6, 9),
-            (0, 5),
-            (-6, 9),
-            (-4, 2),
-            (-10, -3),
-            (-3, -3)
-        ]
-
-        transition_points = [(x + mouse_x, y + mouse_y) for x, y in star_points]
-        pygame.draw.polygon(screen, (190, 16, 224), transition_points, 3)
+        
 
         if event.type == pygame.MOUSEBUTTONDOWN:
             for _ in range(50):
