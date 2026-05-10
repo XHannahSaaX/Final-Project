@@ -54,7 +54,7 @@ def follow_cursor(particles, mouse_pos):
                                          life=1000))
 
 
-def explosion_particles(particles,mouse_pos, amount=30):
+def explosion_particles(particles,mouse_pos, amount=10):
 
     mouse_x, mouse_y = mouse_pos
 
@@ -66,8 +66,8 @@ def explosion_particles(particles,mouse_pos, amount=30):
                 vel_y = math.sin(angle) * speed
 
                 explosion_color = pygame.Color(255,
-                                               random.randint(80, 220),
-                                               random.randint(120, 180))
+                                               random.randint(20, 75),
+                                               random.randint(66, 255))
 
                 particles.append(Particle(pos=(mouse_x, mouse_y), 
                                           vel=[vel_x, vel_y], 
@@ -94,7 +94,8 @@ def cursor_shape(screen, mouse_pos):
         ]
 
     transition_points = [(x + mouse_x, y + mouse_y) for x, y in star_points]
-    pygame.draw.polygon(screen, (190, 16, 224), transition_points, 3)
+    pygame.draw.polygon(screen, (242, 209, 41), transition_points,)
+    pygame.draw.polygon(screen, (240, 165, 17), transition_points, 2)
 
 def main():
 
